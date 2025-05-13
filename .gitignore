@@ -18,3 +18,4 @@ passportarchive-*.json      # old key – now in Secrets
 # ── OS / Editor noise ──────────────────────
 .DS_Store
 *.swp
+.streamlit/secrets.toml
