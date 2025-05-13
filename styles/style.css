@@ -20,7 +20,7 @@ html, body, [data-testid="stAppViewContainer"] {
 .st-key-loginP button,
 .st-key-loginB button {
   background-color: var(--primary) !important;
-  color:            white     !important;
+  color:            #7ab251     !important;
   transition:       background-color .3s;
 }
 .st-key-login button:hover,
