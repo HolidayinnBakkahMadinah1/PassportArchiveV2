@@ -68,6 +68,16 @@ button[aria-label="Open main menu"] {
 /* ─── pin alerts to the very bottom ───────────────────────────── */
 [data-testid="stAlert"] {
   position: relative;
+  color: #8ed05f9d;
+  bottom: 10px !important;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  width: 100%;
+}
+[data-testid="page_link"] {
+  position: relative;
+  color: #7ab251;
   bottom: 10px !important;
   left: 0;
   right: 0;
