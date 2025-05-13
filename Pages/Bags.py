@@ -1,0 +1,54 @@
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+import pandas as pd
+from datetime import date
+import streamlit as st, pathlib, os
+from utils import mount_static, load_css
+from utils import topbar_logo
+
+
+st.set_page_config(page_title="نظام الأرشفة", layout="wide")
+
+def load_css(filepath):
+    with open(filepath) as f:
+        st.html(f"<style>{f.read()}</style>")
+
+css_path = pathlib.Path("styles/style.css")
+load_css(css_path)
+
+st.image("static/LargeLogo.png", width=200)
+topbar_logo("static/LargeLogo.png")
+# Auth guard
+if not st.session_state.get("authentication_status"):
+    st.warning("يرجى تسجيل الدخول أولاً."); st.stop()
+if not any(r in st.session_state.get("user_roles", []) for r in ("admin","editor","user")):
+    st.error("ليس لديك صلاحية الوصول."); st.stop()
+
+# UI
+st.title("تسجيل بيانات الحقائب")
+conn = st.connection("gsheets", type=GSheetsConnection)
+existing = conn.read(worksheet="Bags", usecols=list(range(5)), ttl=10)
+existing = existing.dropna(how="all")
+arrival_gates = ["المطار","القطار","كيلو ٩"]
+nationalities = ["باكستان","أندونيسيا","أخرى"]
+
+with st.form("BagsForm"):
+    bag_number    = st.text_input("رقم الحقيبة*")
+    num_passports = st.number_input("عدد الجوازات داخل الحقيبة*", min_value=1, step=1)
+    arrival_gate  = st.selectbox("بوابة الوصول*", arrival_gates)
+    arrival_date  = st.date_input("تاريخ الوصول*", value=date.today())
+    nationality   = st.selectbox("الجنسية*", nationalities)
+    if nationality == "أخرى":
+        nationality = st.text_input("الرجاء تحديد الجنسية")
+    if st.form_submit_button("تسجيل"):
+        if not bag_number:
+            st.warning("رقم الحقيبة حقل إجباري."); st.stop()
+        new_row = pd.DataFrame([{
+            "Bag Number": bag_number,
+            "Number of Passports": num_passports,
+            "Arrival Gate": arrival_gate,
+            "Arrival Date": arrival_date,
+            "Nationality": nationality,
+        }])
+        conn.update("Bags", pd.concat([existing, new_row], ignore_index=True))
+        st.success("تم حفظ بيانات الحقيبة بنجاح!")

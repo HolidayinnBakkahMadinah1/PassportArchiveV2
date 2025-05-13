@@ -1,0 +1,128 @@
+cookie:
+  expiry_days: 70
+  key: 6b4905471dc3d710d19bf966e10bec369180a9c3cf3c809cf0c6e9baa294110a
+  name: HIB_Passport _Cookie
+credentials:
+  usernames:
+    user01:
+      name: "user1"
+      email: user1@hib.com
+      password: $2b$12$I7z8OZnRFTkbU230WC4qU.IPP4EzlhxtQP6lnWG5pofeVqQwMNiIO
+      roles:
+      - admin
+    user02:
+      name: "user2"
+      email: user2@hib.com
+      password: $2b$12$kbNBQwW9qOuBAuDwcXgP3OVYGvQ/9/t/G.mPMLiDHpk0eOP6JS/Oy # Will be hashed automatically
+      roles: # Optional
+      - admin
+    user03:
+      name: "user3"
+      email: user3@hib.com
+      password: $2b$12$gd12UqTmRMO/GIkN.jOMxudAwGuSVuzXUATiFqUjlNDofsZU8keGu # Will be hashed automatically
+      roles: # Optional
+      - admin
+    user04:
+      email: user4@hib.com
+      name: "user4"
+      password: $2b$12$1OCZ9cNc1S0eQNxHq68Zy.33F2QxUMR/ImfdbChec2CRVxI9UUsge # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user05:
+      email: user5@hib.com
+      name: "user5"
+      password: $2b$12$r30T4iVh4Nteuq.C2XdbzegHuOskE0CSzz4rEla5dOWIpZXT0Gc9y # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user06:
+      email: user6@hib.com
+      name: "user6"
+      password: $2b$12$7y3y1ZIcgGKVEbb.7MjedOhdknumDpbCC4SuXXi52gxMp5hDx9bUO # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user07:
+      email: user7@hib.com
+      name: "user7"
+      password: $2b$12$PuFHX39FQRwajlAZwNRyze7rmOHeFp03p9GiGgPiphbqfqMe92ADa # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user08:
+      email: user8@hib.com
+      name: "user8"
+      password: $2b$12$nPlWt6PUI8ynFKnBV/I73e/IvidouEvC00kLWLqovE.kEUiv25RSu # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user09:
+      email: user9@hib.com
+      name: "user9"
+      password: $2b$12$mxmYpyoYvdJfjUfD49paF.bMBipPKrahUOTT.VBuTJQh5AIhHGfHC # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user10:
+      email: user10@hib.com
+      name: "user10"
+      password: $2b$12$Hfw8gVykeBPIqrXxAvHi0.6/MgaoiP7.wARjLDHLGhoC38Bx6.AXW # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user11:
+      email: user11@hib.com
+      name: "user11"
+      password: $2b$12$aNl.gN/L0hZis52L4Ofew.VJZ.iODEzWOEYYk1Q9Iz4.8DVqqgDUe # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user12:
+      email: user12@hib.com
+      name: "user12"
+      password: $2b$12$w5RTQ2ngWmV./5BxRmojqeWpUa7Xei/m9pTMfhNT90BbojhwbeK.S # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user13:
+      email: user13@hib.com
+      name: "user13"
+      password: $2b$12$bK10HCvSJLjMOpv1Tb6xOul.zKborLBP8gSGizGN2AlQkHPizVgTm # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user14:
+      email: user14@hib.com
+      name: "user14"
+      logged_in: False # Will be managed automatically
+      password: $2b$12$xRmTnxoue45K2.m4KBwOIuF7a3EzT5nwZpwyPxDrn1kDvry1e2srW # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user15:
+      email: user15@hib.com
+      name: "user15"
+      password: $2b$12$dGq.ptE3XKF/9vJRxRmZQ.6.yfMua.gP8RqBXCVy/Cr3kMtvQ0FhS # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user16:
+      email: user16@hib.com
+      name: "user16"
+      password: $2b$12$wuxRGa3fmu45RKk.g/S9ceCB1bOTh5EIq1fBKOZ2J.9N87ll0KpCu # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user17:
+      email: user17@hib.com
+      name: "user17"
+      password: $2b$12$EP4v4P2YLdQbOAYq.XhbbeGuBnbRgowr.XnYo1e1jvnU0j/QDSrAK # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user18:
+      email: user18@hib.com
+      name: "user18"
+      password: $2b$12$iCD43oDQRBprQxwK4esqGOxitcn6eN85oLSnPf4OaJQwn3Tn2UR12 # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user19:
+      email: user19@hib.com
+      name: "user19"
+      password: $2b$12$PuABGkmxVMsQ/y5pJdKIK.nzmRKafAzmf.D1MWUVHhNdZs2MBZhCe # Will be hashed automatically
+      roles: # Optional
+      - editor
+    user20:
+      email: user20@hib.com
+      name: "user20"
+      password: $2b$12$W0V/nZ26vGdE04yfy4UC.evyLJ4PAfKyCj2GbrsZJUo/gs..icKLO # Will be hashed automatically
+      roles: # Optional
+      - editor
+api_key: zj27p122bul3t9aolkmvp99w9fah5hsm
