@@ -44,7 +44,7 @@ h1, h2, h3,
 
 /* sidebar “white pane” behind nav links */
 [data-testid="stSidebarContent"] {
-  background-color: #faebdd !important;
+  background-color: #7ab251 !important;
 }
 
 /* nav link text & hover */
