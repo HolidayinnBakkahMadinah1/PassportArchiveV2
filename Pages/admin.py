@@ -16,9 +16,9 @@ def load_css(filepath):
 css_path = pathlib.Path("styles/style.css")
 load_css(css_path) 
 
-topbar_logo("static/LargeLogo.png")
+
 st.image("static/LargeLogo.png", width=200)
-topbar_logo("static/LargeLogo.png")
+
 # Auth guard
 if not st.session_state.get("authentication_status"):
     st.warning("يرجى تسجيل الدخول أولاً."); st.stop()

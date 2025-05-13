@@ -16,7 +16,7 @@ def load_css(filepath):
 css_path = pathlib.Path("styles/style.css")
 load_css(css_path)
 st.image("static/LargeLogo.png", width=200)
-topbar_logo("static/LargeLogo.png")
+
 # ── Auth guard ──
 if not st.session_state.get("authentication_status"):
     st.warning("يرجى تسجيل الدخول أولاً.")
@@ -57,7 +57,7 @@ with st.form("PassportForm"):
     Departure_date = st.date_input("تاريخ المغادرة", value=date.today())
     Notes        = st.selectbox("الملاحظات", notes_options)
 
-    if st.form_submit_button("تسجيل", key="loginP"):
+    if st.form_submit_button("تسجيل"):
         if not Passport_num:
             st.warning("الرجاء إدخال رقم الجواز."); st.stop()
         new_row = pd.DataFrame([{
