@@ -79,8 +79,8 @@
     position: relative;
   }
   header[data-testid="stHeader"]::after {
+    background: url("static/LargeLogo.png") no-repeat center/contain;
     content: "";
-    background: url("/static/LargeLogo.png") no-repeat center/contain;
     position: absolute;
     width: 130px;          /* edit size as needed */
     height: 40px;
