@@ -1,123 +1,94 @@
 
 /* ───────────── general colours ───────────── */
 :root {
-    --bg        : #f9f6ee;
-    --primary   : #385623;   /* green for titles */
-  }
-  /* ---------- global colours ---------- */
-  html, body, [data-testid="stAppViewContainer"] {
-    background: var(--bg) !important;
-    color     : #000 !important;
-    font-family: "Cairo", sans-serif;
-  }
-  .st-key-login button {
-    background-color:#598837 ;
-    color:aliceblue;
-    position: relative;
-    bottom: 150px;
-    
-  }
-  .st-key-login button:hover {
-    background-color:#7ab251 ;
-    color:rgb(0, 0, 0) ;
-  }
-  .st-key-register button {
-    background-color:#598837 ;
-    color:aliceblue;
-    position: relative;
-    bottom: 150px;
-    left: 250px;
-  }
-  .st-key-register button:hover {
-    background-color:#7ab251 ;
-    color:rgb(0, 0, 0) ;
-  }
-  .st-key-logout button {
-    background-color:#598837 ;
-    color:aliceblue
-  }
-  .st-key-create button {
-    background-color:#598837 ;
-    color:aliceblue
-  }
-  .st-key-enter button {
-    background-color:#598837 ;
-    color:aliceblue
-  }
-  .st-key-loginP button {
-    background-color:#598837 ;
-    color:aliceblue;
-    position: relative;
-    bottom: 150px;
-    
-  }
-  .st-key-loginP button:hover {
-    background-color:#7ab251 ;
-    color:rgb(0, 0, 0) ;
-  }
-  .st-key-loginB button {
-    background-color:#598837 ;
-    color:aliceblue;
-    position: relative;
-    bottom: 150px;
-    
-  }
-  .st-key-loginB button:hover {
-    background-color:#7ab251 ;
-    color:rgb(0, 0, 0) ;
-  }
-  /* headings */
-  .st-key-text text {
-    color: #598837 ;
-  }
-  h1, h2, h3, .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-    color: var(--heading) !important;
-  }
-  
-  /* ---------- header logo (top-right) ---------- */
-  header[data-testid="stHeader"] {
-    position: relative;
-  }
-  header[data-testid="stHeader"]::after {
-    background: url("static/LargeLogo.png") no-repeat center/contain;
-    content: "";
-    position: absolute;
-    width: 130px;          /* edit size as needed */
-    height: 40px;
-    top: 6px;
-    right: 12px;
-  }
-  
-  /* ---------- sidebar logo (top) ---------- */
-  [data-testid="stSidebar"]::before {
-    content: "";
-    display: block;
-    height: 120px;         /* vertical space */
-    background: url("/static/SmallLogo.png") no-repeat center/contain;
-    margin: 10px 20px 25px;
-  }
-  [data-testid="stSidebarContent"] {
-    background-color: #ffffff !important;
-    color: #385623 !important;
-  }
-  [data-testid="stSidebarNav"] {
-    background-image: url("SmallLogo.png");
-    background-repeat: no-repeat;
-    background-position: 15px 15px;
-    padding-top: 70px;
-  }
-  [data-testid="stSidebarNav"] a {
-    color: #000000 !important;
-  }
-  [data-testid="stSidebarNav"] a:hover {
-    background-color: rgba(53, 170, 44, 0.406) !important;
-  }
-  [data-testid="stAlert"] {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 0;
-    width: 100%;
-  }
-  
+  --bg       : #f9f6ee;
+  --primary  : #385623;
+}
+
+/* ─── global ─────────────────────────────────────────────────────── */
+html, body, [data-testid="stAppViewContainer"] {
+  background: var(--bg) !important;
+  color:      #000    !important;
+  font-family: "Cairo", sans-serif;
+}
+
+/* ─── your button overrides ──────────────────────────────────────── */
+.st-key-login button,
+.st-key-register button,
+.st-key-logout button,
+.st-key-create button,
+.st-key-enter button,
+.st-key-loginP button,
+.st-key-loginB button {
+  background-color: var(--primary) !important;
+  color:            aliceblue !important;
+  transition:       background-color .3s;
+}
+.st-key-login button:hover,
+.st-key-register button:hover,
+.st-key-loginP button:hover,
+.st-key-loginB button:hover {
+  background-color: #7ab251 !important;
+  color:            #000     !important;
+}
+
+/* ─── headings ──────────────────────────────────────────────────── */
+h1, h2, h3,
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+  color: var(--primary) !important;
+}
+
+/* ─── header logo (top-right) ────────────────────────────────── */
+header[data-testid="stHeader"] {
+  position: relative;
+}
+header[data-testid="stHeader"]::after {
+  content: "";
+  background: url("/static/LargeLogo.png") no-repeat center/contain;
+  position: absolute;
+  top: 6px; right: 12px;
+  width: 130px; height: 40px;
+}
+
+/* ─── sidebar background & logo ───────────────────────────────── */
+[data-testid="stSidebar"] {
+  background-color: var(--primary) !important;
+}
+[data-testid="stSidebar"]::before {
+  content: "";
+  display: block;
+  height: 120px;
+  margin: 10px 20px 25px;
+  background: url("/static/SmallLogo.png") no-repeat center/contain;
+}
+
+/* sidebar container (below logo) */
+[data-testid="stSidebarContent"] {
+  background-color: #fff !important;   /* white behind links */
+}
+
+/* text & links in nav */
+[data-testid="stSidebarNav"] a {
+  color: #000 !important;
+  padding-left: 1rem;
+}
+[data-testid="stSidebarNav"] a:hover {
+  background-color: rgba(53,170,44,0.4) !important;
+}
+
+/* ─── re-enable the top-right “hamburger” & menu icon ─────── */
+#MainMenu {
+  visibility: visible !important;
+}
+button[aria-label="Open main menu"] {
+  display: block !important;
+  color: var(--primary) !important;
+}
+
+/* ─── pin alerts to the very bottom ───────────────────────────── */
+[data-testid="stAlert"] {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  width: 100%;
+  z-index: 999;
+}
