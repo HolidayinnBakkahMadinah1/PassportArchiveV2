@@ -1,4 +1,3 @@
-
 /* ───────────── general colours ───────────── */
 :root {
   --bg       : #f9f6ee;
@@ -21,7 +20,7 @@ html, body, [data-testid="stAppViewContainer"] {
 .st-key-loginP button,
 .st-key-loginB button {
   background-color: var(--primary) !important;
-  color:            aliceblue !important;
+  color:            white     !important;
   transition:       background-color .3s;
 }
 .st-key-login button:hover,
@@ -38,36 +37,17 @@ h1, h2, h3,
   color: var(--primary) !important;
 }
 
-/* ─── header logo (top-right) ────────────────────────────────── */
-header[data-testid="stHeader"] {
-  position: relative;
-}
-header[data-testid="stHeader"]::after {
-  content: "";
-  background: url("/static/LargeLogo.png") no-repeat center/contain;
-  position: absolute;
-  top: 6px; right: 12px;
-  width: 130px; height: 40px;
-}
-
-/* ─── sidebar background & logo ───────────────────────────────── */
+/* ─── sidebar base colour ───────────────────────────────────────── */
 [data-testid="stSidebar"] {
   background-color: var(--primary) !important;
 }
-[data-testid="stSidebar"]::before {
-  content: "";
-  display: block;
-  height: 120px;
-  margin: 10px 20px 25px;
-  background: url("/static/SmallLogo.png") no-repeat center/contain;
-}
 
-/* sidebar container (below logo) */
+/* sidebar “white pane” behind nav links */
 [data-testid="stSidebarContent"] {
-  background-color: #fff !important;   /* white behind links */
+  background-color: #fff !important;
 }
 
-/* text & links in nav */
+/* nav link text & hover */
 [data-testid="stSidebarNav"] a {
   color: #000 !important;
   padding-left: 1rem;
@@ -76,7 +56,7 @@ header[data-testid="stHeader"]::after {
   background-color: rgba(53,170,44,0.4) !important;
 }
 
-/* ─── re-enable the top-right “hamburger” & menu icon ─────── */
+/* ─── re-enable the built-in hamburger & main menu ───────────── */
 #MainMenu {
   visibility: visible !important;
 }
