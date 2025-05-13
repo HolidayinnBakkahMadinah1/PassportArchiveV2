@@ -41,10 +41,12 @@ html, body, [data-testid="stAppViewContainer"] {
 
 /* ─── headings ──────────────────────────────────────────────────── */
 .stMarkdown, 
-.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, 
-.stMarkdown p, 
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3,  
 .stMarkdown span {
   color: #000 !important;
+}
+.stMarkdown p {
+  color: #7ab251 !important;
 }
 
 /* ─── sidebar base colour ───────────────────────────────────────── */
