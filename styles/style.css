@@ -10,7 +10,15 @@ html, body, [data-testid="stAppViewContainer"] {
   color:      #000    !important;
   font-family: "Cairo", sans-serif;
 }
-
+[data-testid="stTextInput"] label,
+[data-testid="stNumberInput"] label,
+[data-testid="stDateInput"] label,
+[data-testid="stSelectbox"] label,
+[data-testid="stRadioGroup"] label,
+[data-testid="stCheckbox"] label,
+[data-testid="stDateInput"] label {
+  color: #000 !important;
+}
 /* ─── your button overrides ──────────────────────────────────────── */
 .st-key-login button,
 .st-key-register button,
@@ -32,9 +40,11 @@ html, body, [data-testid="stAppViewContainer"] {
 }
 
 /* ─── headings ──────────────────────────────────────────────────── */
-h1, h2, h3,
-.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-  color: var(--primary) !important;
+.stMarkdown, 
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, 
+.stMarkdown p, 
+.stMarkdown span {
+  color: #000 !important;
 }
 
 /* ─── sidebar base colour ───────────────────────────────────────── */
