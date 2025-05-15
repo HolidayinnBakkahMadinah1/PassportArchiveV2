@@ -59,7 +59,6 @@ load_css(css_path)
 
 
 st.image("static/LargeLogo.png", width=200)
-topbar_logo("static/LargeLogo.png") 
 
 
 # ─── 0) Streamlit page config ────────────────────────────────────────────────
