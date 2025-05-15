@@ -50,5 +50,8 @@ with st.form("BagsForm"):
             "Arrival Date": arrival_date,
             "Nationality": nationality,
         }])
-        conn.update("Bags", pd.concat([existing, new_row], ignore_index=True))
+        conn.update(
+            worksheet="Passports",
+            dataframe=pd.concat([existing_dataP, new_row], ignore_index=True),
+        )
         st.success("تم حفظ بيانات الحقيبة بنجاح!")
