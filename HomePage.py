@@ -39,7 +39,7 @@ HomePage.py — Streamlit + Supabase (بدون تحكم للمستخدم في ا
 import streamlit as st
 from supabase import create_client, Client
 import streamlit as st, pathlib, os
-from utils import mount_static, load_css, topbar_logo
+from utils import load_css
 from pathlib import Path
 
 

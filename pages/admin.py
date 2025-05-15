@@ -3,8 +3,8 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from io import BytesIO
 import streamlit as st, pathlib, os
-from utils import mount_static, load_css
-from utils import topbar_logo
+from utils import load_css
+
 
 
 st.set_page_config(page_title="نظام الأرشفة", layout="wide")
