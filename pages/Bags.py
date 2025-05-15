@@ -61,7 +61,7 @@ import gspread
 from utils import load_css
 
 st.set_page_config(page_title="الحقائب", layout="wide")
-load_css(pathlib.Path("../styles/style.css"))
+load_css(pathlib.Path("styles/style.css"))
 
 # Auth guard
 if not st.session_state.get("authentication_status"):
