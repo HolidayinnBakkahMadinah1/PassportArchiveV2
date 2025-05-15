@@ -111,9 +111,13 @@ ws_bags      = sh.worksheet("Bags")
 existing_P = pd.DataFrame(ws_passports.get_all_records())
 existing_B = pd.DataFrame(ws_bags.get_all_records())
 
-bags_list     = existing_B["Bag Number"].tolist()
+if "Bag Number" in existing_B.columns:
+    bags_list = existing_B["Bag Number"].dropna().tolist()
+else:
+    bags_list = []       
+
 arrival_gates = ["المطار", "القطار", "كيلو ٩"]
-notes_options = ["لا يوجد","متوفى","مفقود","تم إلقاء القبض","تم ترحيله"]
+notes_options = ["لا يوجد", "متوفى", "مفقود", "تم إلقاء القبض", "تم ترحيله"]
 
 st.title("أرشفة الجوازات")
 with st.form("PassportForm"):
