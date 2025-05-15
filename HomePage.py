@@ -1,3 +1,38 @@
+# """
+# HomePage.py — Streamlit + Supabase (بدون تحكم للمستخدم في الدور)
+# """
+# import streamlit as st
+# from supabase import create_client, Client
+# import streamlit as st, pathlib, os
+# from utils import mount_static, load_css, topbar_logo
+# from pathlib import Path
+
+
+# st.set_page_config(page_title="نظام الأرشفة", layout="wide")
+
+# BASE = Path(__file__).parent
+# logo_path = BASE / "static" / "LargeLogo.png"
+# st.image(str(logo_path), width=200)
+
+# def load_css(filepath):
+#     with open(filepath) as f:
+#         st.html(f"<style>{f.read()}</style>")
+
+# css_path = pathlib.Path("styles/style.css")
+# load_css(css_path)
+
+
+
+# st.image("static/LargeLogo.png", width=200)
+# topbar_logo("static/LargeLogo.png") 
+
+
+# # ─── 0) Streamlit page config ────────────────────────────────────────────────
+
+# # ─── 1) Supabase client (anon key from secrets.toml) ─────────────────────────
+# url  = st.secrets["supabase"]["url"]
+# anon = st.secrets["supabase"]["anon"]
+# supabase: Client = create_client(url, anon)
 """
 HomePage.py — Streamlit + Supabase (بدون تحكم للمستخدم في الدور)
 """
@@ -5,8 +40,14 @@ import streamlit as st
 from supabase import create_client, Client
 import streamlit as st, pathlib, os
 from utils import mount_static, load_css, topbar_logo
+from pathlib import Path
+
 
 st.set_page_config(page_title="نظام الأرشفة", layout="wide")
+
+BASE = Path(__file__).parent
+logo_path = BASE / "static" / "LargeLogo.png"
+st.image(str(logo_path), width=200)
 
 def load_css(filepath):
     with open(filepath) as f:
