@@ -538,123 +538,211 @@
 
 # pages/Passport.py
 # pages/Passport.py
-import streamlit as st
-import pandas as pd
-import pathlib
+# import streamlit as st
+# import pandas as pd
+# import pathlib
+# from datetime import date
+# from google.oauth2.service_account import Credentials
+# import gspread
+# from utils import load_css
+
+# # ─── 1) إعداد الصفحة ────────────────────────────────────────────────
+# st.set_page_config(page_title="جوازات السفر", layout="wide")
+# load_css(pathlib.Path("styles/style.css"))
+
+# # ─── 2) التحقق من تسجيل الدخول ─────────────────────────────────────
+# if not st.session_state.get("authenticated"):
+#     st.info("يرجى تسجيل الدخول لاستخدام النظام.")
+#     st.stop()
+
+# current_user = st.session_state["user_email"]
+
+# # ─── 3) الاتصال بجوجل شيتس ─────────────────────────────────────────
+# SCOPES = [
+#     "https://www.googleapis.com/auth/spreadsheets",
+#     "https://www.googleapis.com/auth/drive",
+# ]
+# creds = Credentials.from_service_account_info(
+#     st.secrets["connections"]["gsheets"], scopes=SCOPES
+# )
+# gc = gspread.authorize(creds)
+# sh = gc.open_by_url(st.secrets["connections"]["gsheets"]["spreadsheet"])
+# ws_passports = sh.worksheet("Passports")
+# ws_bags      = sh.worksheet("Bags")
+
+# passports_df = pd.DataFrame(ws_passports.get_all_records())
+# bags_df      = pd.DataFrame(ws_bags.get_all_records())
+
+# bags_list = bags_df["Bag Number"].dropna().tolist() if "Bag Number" in bags_df else []
+# arrival_gates = ["المطار", "القطار", "كيلو ٩"]
+# notes_options = ["لا يوجد", "متوفى", "مفقود", "تم إلقاء القبض", "تم ترحيله"]
+
+# st.title("أرشفة الجوازات")
+
+# # ─── 4) اختيار الحقيبة + عدّاد دينامى ──────────────────────────────
+# selected_bag = st.selectbox("اختر رقم الحقيبة*", bags_list, key="selected_bag")
+
+# def count_passports_for(bag_no: str) -> int:
+#     return passports_df[passports_df["Bag Number"] == bag_no].shape[0]
+
+# bag_counter_placeholder = st.empty()
+# bag_counter_placeholder.info(
+#     f"📦 الجوازات المسجَّلة لهذه الحقيبة: **{count_passports_for(selected_bag)}**"
+# )
+
+# # ─── 5) نموذج الإدخال ──────────────────────────────────────────────
+# with st.form("PassportForm", clear_on_submit=False):
+
+#     Passport_num = st.text_input("رقم جواز السفر*", key="passport_no").upper()
+
+#     DateOfBirth  = st.date_input(
+#         "تاريخ الميلاد*",
+#         value=date(1990, 1, 1),
+#         min_value=date(1900, 1, 1),
+#         max_value=date.today(),
+#     )
+
+#     Gender = st.selectbox("الجنس*", ("Male", "Female"), key="gender")
+
+#     nat_choice = st.selectbox("الجنسية*", ("باكستان", "أندونيسيا", "أخرى"), key="nat_choice")
+#     if nat_choice == "أخرى":
+#         Nationality = st.text_input("الرجاء تحديد الجنسية*", key="nationality")
+#     else:
+#         Nationality = nat_choice
+
+#     # حقول اختيارية
+#     Barcode = st.text_input("باركود نسك (اختياري)", key="barcode")
+#     NameEN  = st.text_input("الاسم بالإنجليزية (اختياري)", key="name_en")
+#     NameAR  = st.text_input("الاسم بالعربية (اختياري)",   key="name_ar")
+
+#     Arrival_gate   = st.selectbox("بوابة الوصول*", arrival_gates, key="arrival_gate")
+#     Arrival_date   = st.date_input("تاريخ الوصول*", value=date.today(), key="arrival_date")
+#     Departure_date = st.date_input("تاريخ المغادرة", value=date.today(), key="departure_date")
+#     Notes          = st.selectbox("الملاحظات", notes_options, key="notes")
+
+#     submitted = st.form_submit_button("تسجيل")
+
+# # ─── 6) عند الحفظ ──────────────────────────────────────────────────
+# if submitted:
+
+#     # تحقق من الحقول الإلزامية
+#     if not (selected_bag and Passport_num and DateOfBirth and Nationality):
+#         st.warning("الرجاء تعبئة جميع الحقول الإلزامية.")
+#         st.stop()
+
+#     # منع التكرار
+#     if Passport_num in passports_df["Passport Number"].astype(str).tolist():
+#         st.warning(" هذا الجواز مسجَّل مسبقًا.")
+#         st.stop()
+
+#     # إضافة الصفّ
+#     row = [
+#         Passport_num,
+#         Barcode, NameEN, NameAR,
+#         DateOfBirth.strftime("%Y-%m-%d"),
+#         Gender, Nationality,
+#         selected_bag, Arrival_gate,
+#         Arrival_date.strftime("%Y-%m-%d"),
+#         Departure_date.strftime("%Y-%m-%d"),
+#         Notes,
+#         current_user,
+#     ]
+#     ws_passports.append_row(row, value_input_option="USER_ENTERED")
+
+#     st.success(" تم حفظ بيانات الجواز بنجاح!")
+
+#     # تحديث الـ DataFrame والعدّاد محليًا ثم إعادة تشغيل الصفحة
+#     passports_df.loc[len(passports_df)] = {
+#         "Passport Number": Passport_num,
+#         "Bag Number":      selected_bag,
+#     }
+#     st.session_state["passport_no"] = ""   # تفريغ الحقل بعد الحفظ
+#     st.experimental_rerun()                # يعيد الحساب ويُظهِر العدّاد الجديد
+#-------------------------------------------------------------
+import streamlit as st, pandas as pd, pathlib
 from datetime import date
 from google.oauth2.service_account import Credentials
 import gspread
 from utils import load_css
 
-# ─── 1) إعداد الصفحة ────────────────────────────────────────────────
+# ─── page setup & CSS ───────────────────────────────────────────────
 st.set_page_config(page_title="جوازات السفر", layout="wide")
 load_css(pathlib.Path("styles/style.css"))
 
-# ─── 2) التحقق من تسجيل الدخول ─────────────────────────────────────
+# ─── authentication guard ──────────────────────────────────────────
 if not st.session_state.get("authenticated"):
     st.info("يرجى تسجيل الدخول لاستخدام النظام.")
     st.stop()
 
-current_user = st.session_state["user_email"]
+user_email = st.session_state["user_email"]
 
-# ─── 3) الاتصال بجوجل شيتس ─────────────────────────────────────────
+# ─── G-Sheets connection helpers ───────────────────────────────────
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive",
 ]
-creds = Credentials.from_service_account_info(
+creds  = Credentials.from_service_account_info(
     st.secrets["connections"]["gsheets"], scopes=SCOPES
 )
-gc = gspread.authorize(creds)
-sh = gc.open_by_url(st.secrets["connections"]["gsheets"]["spreadsheet"])
-ws_passports = sh.worksheet("Passports")
-ws_bags      = sh.worksheet("Bags")
+gc     = gspread.authorize(creds)
+sh     = gc.open_by_url(st.secrets["connections"]["gsheets"]["spreadsheet"])
+ws_p   = sh.worksheet("Passports")
+ws_b   = sh.worksheet("Bags")
 
-passports_df = pd.DataFrame(ws_passports.get_all_records())
-bags_df      = pd.DataFrame(ws_bags.get_all_records())
+df_p = pd.DataFrame(ws_p.get_all_records())
+df_b = pd.DataFrame(ws_b.get_all_records())
 
-bags_list = bags_df["Bag Number"].dropna().tolist() if "Bag Number" in bags_df else []
+bags_list = df_b["Bag Number"].dropna().tolist() if "Bag Number" in df_b else []
 arrival_gates = ["المطار", "القطار", "كيلو ٩"]
-notes_options = ["لا يوجد", "متوفى", "مفقود", "تم إلقاء القبض", "تم ترحيله"]
+notes_options  = ["لا يوجد", "متوفى", "مفقود", "تم إلقاء القبض", "تم ترحيله"]
 
 st.title("أرشفة الجوازات")
 
-# ─── 4) اختيار الحقيبة + عدّاد دينامى ──────────────────────────────
-selected_bag = st.selectbox("اختر رقم الحقيبة*", bags_list, key="selected_bag")
+# ─── bag selector + live counter ────────────────────────────────────
+selected_bag = st.selectbox("رقم الحقيبة*", bags_list)
+bag_count = df_p[df_p["Bag Number"] == selected_bag].shape[0]
+st.info(f"📦 عدد الجوازات المسجَّلة لهذه الحقيبة: **{bag_count}**")
 
-def count_passports_for(bag_no: str) -> int:
-    return passports_df[passports_df["Bag Number"] == bag_no].shape[0]
+# ─── passport entry form (auto-clears) ─────────────────────────────
+with st.form("passport_form", clear_on_submit=True):
+    passport_no = st.text_input("رقم جواز السفر*").upper()
+    dob         = st.date_input("تاريخ الميلاد*", value=date(1990,1,1),
+                                min_value=date(1900,1,1), max_value=date.today())
+    gender      = st.selectbox("الجنس*", ["Male","Female"])
 
-bag_counter_placeholder = st.empty()
-bag_counter_placeholder.info(
-    f"📦 الجوازات المسجَّلة لهذه الحقيبة: **{count_passports_for(selected_bag)}**"
-)
+    nat_choice  = st.selectbox("الجنسية*", ["باكستان","أندونيسيا","أخرى"])
+    nationality = st.text_input("الرجاء تحديد الجنسية") if nat_choice == "أخرى" else nat_choice
 
-# ─── 5) نموذج الإدخال ──────────────────────────────────────────────
-with st.form("PassportForm", clear_on_submit=False):
+    barcode     = st.text_input("باركود نسك (اختياري)")
+    name_en     = st.text_input("الاسم بالإنجليزية (اختياري)")
+    name_ar     = st.text_input("الاسم بالعربية (اختياري)")
 
-    Passport_num = st.text_input("رقم جواز السفر*", key="passport_no").upper()
+    gate        = st.selectbox("بوابة الوصول*", arrival_gates)
+    arr_date    = st.date_input("تاريخ الوصول*", value=date.today())
+    dep_date    = st.date_input("تاريخ المغادرة", value=date.today())
+    notes       = st.selectbox("الملاحظات", notes_options)
 
-    DateOfBirth  = st.date_input(
-        "تاريخ الميلاد*",
-        value=date(1990, 1, 1),
-        min_value=date(1900, 1, 1),
-        max_value=date.today(),
-    )
+    submitted   = st.form_submit_button("حفظ السجل")
 
-    Gender = st.selectbox("الجنس*", ("Male", "Female"), key="gender")
-
-    nat_choice = st.selectbox("الجنسية*", ("باكستان", "أندونيسيا", "أخرى"), key="nat_choice")
-    if nat_choice == "أخرى":
-        Nationality = st.text_input("الرجاء تحديد الجنسية*", key="nationality")
-    else:
-        Nationality = nat_choice
-
-    # حقول اختيارية
-    Barcode = st.text_input("باركود نسك (اختياري)", key="barcode")
-    NameEN  = st.text_input("الاسم بالإنجليزية (اختياري)", key="name_en")
-    NameAR  = st.text_input("الاسم بالعربية (اختياري)",   key="name_ar")
-
-    Arrival_gate   = st.selectbox("بوابة الوصول*", arrival_gates, key="arrival_gate")
-    Arrival_date   = st.date_input("تاريخ الوصول*", value=date.today(), key="arrival_date")
-    Departure_date = st.date_input("تاريخ المغادرة", value=date.today(), key="departure_date")
-    Notes          = st.selectbox("الملاحظات", notes_options, key="notes")
-
-    submitted = st.form_submit_button("تسجيل")
-
-# ─── 6) عند الحفظ ──────────────────────────────────────────────────
+# ─── save logic ─────────────────────────────────────────────────────
 if submitted:
-
-    # تحقق من الحقول الإلزامية
-    if not (selected_bag and Passport_num and DateOfBirth and Nationality):
-        st.warning("الرجاء تعبئة جميع الحقول الإلزامية.")
+    if not passport_no:
+        st.error("الرجاء إدخال رقم جواز السفر.")
         st.stop()
 
-    # منع التكرار
-    if Passport_num in passports_df["Passport Number"].astype(str).tolist():
-        st.warning(" هذا الجواز مسجَّل مسبقًا.")
+    if passport_no in df_p["Passport Number"].astype(str).tolist():
+        st.warning("🚫 هذا الجواز مسجَّل مسبقًا.")
         st.stop()
 
-    # إضافة الصفّ
-    row = [
-        Passport_num,
-        Barcode, NameEN, NameAR,
-        DateOfBirth.strftime("%Y-%m-%d"),
-        Gender, Nationality,
-        selected_bag, Arrival_gate,
-        Arrival_date.strftime("%Y-%m-%d"),
-        Departure_date.strftime("%Y-%m-%d"),
-        Notes,
-        current_user,
+    new_row = [
+        passport_no, barcode, name_en, name_ar,
+        dob.strftime("%Y-%m-%d"), gender, nationality,
+        selected_bag, gate,
+        arr_date.strftime("%Y-%m-%d"),
+        dep_date.strftime("%Y-%m-%d"),
+        notes,
+        user_email,                 # SubmittedBy
     ]
-    ws_passports.append_row(row, value_input_option="USER_ENTERED")
-
-    st.success(" تم حفظ بيانات الجواز بنجاح!")
-
-    # تحديث الـ DataFrame والعدّاد محليًا ثم إعادة تشغيل الصفحة
-    passports_df.loc[len(passports_df)] = {
-        "Passport Number": Passport_num,
-        "Bag Number":      selected_bag,
-    }
-    st.session_state["passport_no"] = ""   # تفريغ الحقل بعد الحفظ
-    st.experimental_rerun()                # يعيد الحساب ويُظهِر العدّاد الجديد
+    ws_p.append_row(new_row, value_input_option="USER_ENTERED")
+    st.success("✅ تم حفظ بيانات الجواز بنجاح!")
+    st.rerun() 
