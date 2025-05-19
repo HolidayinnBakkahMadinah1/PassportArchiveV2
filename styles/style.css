@@ -96,3 +96,18 @@ button[aria-label="Open main menu"] {
   z-index: 0;
   width: 100%;
 }
+/* ─── force white backgrounds on all inputs & selects ───────────────── */
+.stTextInput>div>div>input,
+.stNumberInput>div>div>input,
+.stDateInput>div>div>input,
+.stSelectbox>div>div>div[role="button"],
+.stSelectbox>div>div>div[role="listbox"] {
+  background-color: #ffffff !important;
+  color:            #000000 !important;
+}
+
+/* also override dropdown items */
+.stSelectbox>div>div[role="listbox"] .css-yt9ioa-option {
+  background-color: #ffffff !important;
+  color:            #000000 !important;
+}
